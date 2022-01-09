@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1641724116967,
+  "lastUpdate": 1641729664030,
   "repoUrl": "https://github.com/speedy-js/napi-template",
   "entries": {
     "Benchmark": [
@@ -76,6 +76,44 @@ window.BENCHMARK_DATA = {
             "range": "±0.14%",
             "unit": "ops/sec",
             "extra": "96 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "distinct": true,
+          "id": "4e44b6d6ead6f4fd83068c373d1b53b7ae5d977e",
+          "message": "ci: always comment benchmark result",
+          "timestamp": "2022-01-09T19:59:50+08:00",
+          "tree_id": "f7931426d8467eed58be9da5109e52e5255c4374",
+          "url": "https://github.com/speedy-js/napi-template/commit/4e44b6d6ead6f4fd83068c373d1b53b7ae5d977e"
+        },
+        "date": 1641729663026,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#native",
+            "value": 20991503,
+            "range": "±0.73%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "add#node",
+            "value": 714760103,
+            "range": "±0.15%",
+            "unit": "ops/sec",
+            "extra": "97 samples"
           }
         ]
       }
