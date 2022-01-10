@@ -1,13 +1,16 @@
 import { Suite } from 'benchmark'
 import chalk from "chalk";
 
-import { add } from "../node"
-
+import { add as napiAdd } from "../node"
+import { add as wasmAdd } from '../wasm/pkg-node';
 const s = new Suite("bench")
 
 s
-  .add('add#native', () => {
-    add(1, 2)
+  .add('add#rust_napi_node', () => {
+    napiAdd(1, 2)
+  })
+  .add('add#rust_wasm_node', () => {
+    wasmAdd(1, 2)
   })
   .add('add#node', () => {
     const res = 1 + 2
