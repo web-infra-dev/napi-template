@@ -1,5 +1,4 @@
 [package]
-authors = ["h-a-n-a <andywangsy@gmail.com>"]
 description = "speedy sourcemap"
 edition = "2021"
 license = "MIT"

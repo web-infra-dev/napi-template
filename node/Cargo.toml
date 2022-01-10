@@ -1,5 +1,4 @@
 [package]
-authors = ["h-a-n-a <andywangsy@gmail.com>"]
 edition = "2021"
 name = "speedy_sourcemap_node"
 publish = false

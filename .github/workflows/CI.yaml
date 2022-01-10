@@ -42,7 +42,7 @@ jobs:
               export CARGO_PROFILE_RELEASE_CODEGEN_UNITS=32;
               export CARGO_PROFILE_RELEASE_LTO=false
               pnpm build --dir node -- --target i686-pc-windows-msvc
-              pnpm test
+              pnpm test:node
             target: 'i686-pc-windows-msvc'
             setup: |
               choco install nodejs-lts --x86 -y --force
@@ -218,7 +218,7 @@ jobs:
         shell: bash
 
       - name: Test bindings
-        run: pnpm test
+        run: pnpm test:node
 
   test-linux-x64-gnu-binding:
     name: Test bindings on Linux-x64-gnu - node@${{ matrix.node }}
@@ -250,7 +250,7 @@ jobs:
         shell: bash
 
       - name: Test bindings
-        run: docker run --rm -v $(pwd):/${{ env.APP_NAME }} -w /${{ env.APP_NAME }} node:${{ matrix.node }}-slim sh -c "npm install -g pnpm && pnpm install && pnpm test"
+        run: docker run --rm -v $(pwd):/${{ env.APP_NAME }} -w /${{ env.APP_NAME }} node:${{ matrix.node }}-slim sh -c "npm install -g pnpm && pnpm install && pnpm test:node"
 
   test-linux-x64-musl-binding:
     name: Test bindings on x86_64-unknown-linux-musl - node@${{ matrix.node }}
@@ -282,7 +282,7 @@ jobs:
         shell: bash
 
       - name: Test bindings
-        run: docker run --rm -v $(pwd):/${{ env.APP_NAME }} -w /${{ env.APP_NAME }} node:${{ matrix.node }}-alpine sh -c "npm install -g pnpm && pnpm install && pnpm test"
+        run: docker run --rm -v $(pwd):/${{ env.APP_NAME }} -w /${{ env.APP_NAME }} node:${{ matrix.node }}-alpine sh -c "npm install -g pnpm && pnpm install && pnpm test:node"
 
   test-linux-aarch64-gnu-binding:
     name: Test bindings on aarch64-unknown-linux-gnu - node@${{ matrix.node }}
@@ -318,7 +318,7 @@ jobs:
             set -e
             npm install -g pnpm
             pnpm install --frozen-lockfile
-            pnpm test
+            pnpm test:node
             ls -la
 
   test-linux-aarch64-musl-binding:
@@ -351,8 +351,9 @@ jobs:
               apk add nodejs npm && \
               npm install -g pnpm && \
               pnpm install --frozen-lockfile && \
-              npm test
+              pnpm test:node
             "
+  
   test-linux-arm-gnueabihf-binding:
     name: Test bindings on armv7-unknown-linux-gnueabihf - node@${{ matrix.node }}
     needs:
@@ -387,8 +388,54 @@ jobs:
             set -e
             npm install -g pnpm
             pnpm install --frozen-lockfile
-            pnpm test
+            pnpm test:node
             ls -la
+
+  test-wasm:
+    name: Test wasm on Linux-x64-gnu - node@${{ matrix.node }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['12', '14', '16']
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Install
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          override: true
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v1
+        with:
+          key: ${{ matrix.settings.target }}-node@14-cargo-cache
+
+      - name: 'Install wasm-pack'
+        uses: jetli/wasm-pack-action@v0.3.0
+        with:
+          version: 'latest'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --registry https://registry.npm.taobao.org
+
+      - name: List packages
+        run: ls -R .
+        shell: bash
+
+      - name: Build and test wasm
+        run: pnpm build --dir wasm && pnpm test:wasm
 
   publish:
     name: Publish

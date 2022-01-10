@@ -12,9 +12,10 @@
   ],
   "scripts": {
     "bench": "node -r @swc-node/register benchmark/bench.ts",
-    "build": "pnpm build --dir node",
+    "build": "pnpm build -r",
+    "test:node": "mocha -r @swc-node/register node/**/__tests__/**/*.spec.ts",
     "format": "prettier . -w",
-    "test": "mocha -r @swc-node/register **/__tests__/**/*.spec.ts"
+    "test:wasm": "mocha -r @swc-node/register wasm/**/__tests__/**/*.spec.ts"
   },
   "devDependencies": {
     "@napi-rs/cli": "^2.0.0",

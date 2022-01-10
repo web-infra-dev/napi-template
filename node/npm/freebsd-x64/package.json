@@ -19,12 +19,6 @@
     "N-API",
     "napi-rs"
   ],
-  "authors": [
-    {
-      "name": "h-a-n-a",
-      "email": "andywangsy@gmail.com"
-    }
-  ],
   "license": "MIT",
   "engines": {
     "node": ">= 10"
