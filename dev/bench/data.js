@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1641812231489,
+  "lastUpdate": 1641814606687,
   "repoUrl": "https://github.com/speedy-js/napi-template",
   "entries": {
     "Benchmark": [
@@ -332,6 +332,47 @@ window.BENCHMARK_DATA = {
             "range": "±1.32%",
             "unit": "ops/sec",
             "extra": "82 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "speedy-js",
+            "username": "speedy-js"
+          },
+          "committer": {
+            "name": "speedy-js",
+            "username": "speedy-js"
+          },
+          "id": "fcf97d4322f5ab97c01fe8f8a80bf314057ce121",
+          "message": "feat(wasm): init",
+          "timestamp": "2022-01-09T11:59:59Z",
+          "url": "https://github.com/speedy-js/napi-template/pull/1/commits/fcf97d4322f5ab97c01fe8f8a80bf314057ce121"
+        },
+        "date": 1641814604986,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#rust_napi_node",
+            "value": 22327280,
+            "range": "±0.14%",
+            "unit": "ops/sec",
+            "extra": "96 samples"
+          },
+          {
+            "name": "add#rust_wasm_node",
+            "value": 74509091,
+            "range": "±0.34%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "add#node",
+            "value": 714053225,
+            "range": "±0.13%",
+            "unit": "ops/sec",
+            "extra": "98 samples"
           }
         ]
       }
