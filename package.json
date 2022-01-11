@@ -12,9 +12,12 @@
   ],
   "scripts": {
     "bench": "node -r @swc-node/register benchmark/bench.ts",
-    "build": "pnpm build -r",
-    "test:node": "mocha -r @swc-node/register node/**/__tests__/**/*.spec.ts",
+    "build:node": "pnpm build --dir node",
+    "build:wasm": "pnpm build --dir wasm",
+    "build": "pnpm build:node && pnpm build:wasm",
     "format": "prettier . -w",
+    "test": "pnpm test:node && pnpm test:wasm",
+    "test:node": "mocha -r @swc-node/register node/**/__tests__/**/*.spec.ts",
     "test:wasm": "mocha -r @swc-node/register wasm/**/__tests__/**/*.spec.ts"
   },
   "devDependencies": {
