@@ -353,7 +353,7 @@ jobs:
               pnpm install --frozen-lockfile && \
               pnpm test:node
             "
-  
+
   test-linux-arm-gnueabihf-binding:
     name: Test bindings on armv7-unknown-linux-gnueabihf - node@${{ matrix.node }}
     needs:
@@ -481,11 +481,21 @@ jobs:
         run: ls -R ./node/npm
         shell: bash
 
-      - name: Publish
+      - name: Publish Node
         if: "startsWith(github.event.head_commit.message, 'chore(release): publish')"
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
           cd node
+          pnpm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish Web-Assembly
+        if: "startsWith(github.event.head_commit.message, 'chore(release): publish')"
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          cd wasm
           pnpm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
