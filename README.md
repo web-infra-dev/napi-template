@@ -78,17 +78,6 @@ This project is also using Cargo workspaces for managing multiple crates.
 
 ## Development
 
-**Create a crate**
-
-```bash
-# Create a new crate under the `core` directory
-cargo new core/speedy-you-name-it --lib
-```
-
-**Create corresponding node bindings if necessary**
-
-For more information about the node bindings, please refer to [NAPI-RS](https://github.com/napi-rs/napi-rs) or [Node](./node)
-
 **Build Node bindings**
 
 ```bash
@@ -98,6 +87,12 @@ pnpm build:debug --dir node
 
 # Regular optimized build
 pnpm build --dir node
+```
+
+**Build WebAssembly bindings**
+
+```bash
+pnpm build:wasm
 ```
 
 ## Testing
