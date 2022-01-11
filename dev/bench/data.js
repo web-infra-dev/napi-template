@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1641895530575,
+  "lastUpdate": 1641896002558,
   "repoUrl": "https://github.com/speedy-js/napi-template",
   "entries": {
     "Benchmark": [
@@ -621,6 +621,51 @@ window.BENCHMARK_DATA = {
             "name": "add#node",
             "value": 713018963,
             "range": "±0.11%",
+            "unit": "ops/sec",
+            "extra": "96 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "Hana",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f0056905c6be61291c02c669bf6fa2f9cb5a0a5f",
+          "message": "chore: add web-assembly publish (#2)",
+          "timestamp": "2022-01-11T18:12:04+08:00",
+          "tree_id": "0ba8b406e25bfd124fdfb155d2a876a7b616dfbe",
+          "url": "https://github.com/speedy-js/napi-template/commit/f0056905c6be61291c02c669bf6fa2f9cb5a0a5f"
+        },
+        "date": 1641896001420,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#rust_napi_node",
+            "value": 22349546,
+            "range": "±0.23%",
+            "unit": "ops/sec",
+            "extra": "96 samples"
+          },
+          {
+            "name": "add#rust_wasm_node",
+            "value": 72916161,
+            "range": "±0.32%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "add#node",
+            "value": 714396080,
+            "range": "±0.13%",
             "unit": "ops/sec",
             "extra": "96 samples"
           }
