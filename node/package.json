@@ -1,34 +1,11 @@
 {
-  "name": "@speedy-js/source-map",
+  "name": "node",
   "version": "0.0.0",
+  "private": true,
   "description": "Speedy source-map",
-  "main": "index.js",
-  "types": "index.d.ts",
-  "repository": "https://github.com/speedy-js/napi-template.git",
-  "license": "MIT",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "keywords": [
-    "sourcemap",
-    "speedy",
-    "napi",
-    "N-API",
-    "napi-rs"
-  ],
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "binding.js"
-  ],
   "scripts": {
-    "artifacts": "napi artifacts",
-    "build": "napi build --platform --release --js binding.js --pipe \"prettier -w\"",
-    "build:debug": "napi build --platform --js binding.js --pipe \"prettier -w\"",
-    "prepublishOnly": "napi prepublish -t npm && esbuild --minify --outfile=binding.js --allow-overwrite binding.js",
-    "lint": "echo lint",
-    "version": "napi version"
+    "build": "napi build --platform --release --js binding.js --dts binding.d.ts --pipe \"prettier -w\"",
+    "build:debug": "napi build --platform --js binding.js --dts binding.d.ts --pipe \"prettier -w\""
   },
   "napi": {
     "name": "speedy-sourcemap",
@@ -46,6 +23,9 @@
         "aarch64-linux-android",
         "armv7-linux-androideabi"
       ]
+    },
+    "package": {
+      "name": "@speedy-js/source-map"
     }
   },
   "engines": {

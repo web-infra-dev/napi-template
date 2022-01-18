@@ -1,21 +1,47 @@
 {
-  "name": "speedy-sourcemap",
+  "name": "@speedy-js/source-map",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Speedy source-map",
+  "main": "node/index.js",
+  "types": "index.d.ts",
   "repository": "https://github.com/speedy-js/napi-template",
   "license": "MIT",
-  "private": true,
+  "keywords": [
+    "sourcemap",
+    "speedy",
+    "napi",
+    "N-API",
+    "napi-rs",
+    "WebAssembly",
+    "wasm"
+  ],
+  "files": [
+    "index.d.ts",
+    "wasm-bindings.js",
+    "node/binding.js",
+    "node/binding.d.ts",
+    "node/index.js",
+    "node/index.d.ts",
+    "wasm/pkg-web",
+    "wasm/pkg-node"
+  ],
+  "browser": {
+    "node/index.js": "wasm/pkg-web/index.js",
+    "wasm-bindings.js": "wasm/pkg-web/index.js"
+  },
   "workspaces": [
     "node",
     "benchmark"
   ],
   "scripts": {
     "bench": "node -r @swc-node/register benchmark/bench.ts",
+    "artifacts": "napi artifacts",
+    "prepublishOnly": "napi prepublish -t npm && esbuild --minify --outfile=node/binding.js --allow-overwrite node/binding.js",
     "build:node": "pnpm build --dir node",
     "build:wasm": "pnpm build --dir wasm",
     "build": "pnpm build:node && pnpm build:wasm",
     "format": "prettier . -w",
+    "lint": "echo lint",
     "test": "pnpm test:node && pnpm test:wasm",
     "test:node": "mocha -r @swc-node/register node/**/__tests__/**/*.spec.ts",
     "test:wasm": "mocha -r @swc-node/register wasm/**/__tests__/**/*.spec.ts"
@@ -40,5 +66,26 @@
     "singleQuote": true,
     "trailingComma": "all",
     "arrowParens": "always"
+  },
+  "napi": {
+    "name": "speedy-sourcemap",
+    "triples": {
+      "defaults": true,
+      "additional": [
+        "x86_64-unknown-linux-musl",
+        "aarch64-unknown-linux-gnu",
+        "i686-pc-windows-msvc",
+        "armv7-unknown-linux-gnueabihf",
+        "aarch64-apple-darwin",
+        "x86_64-unknown-freebsd",
+        "aarch64-unknown-linux-musl",
+        "aarch64-pc-windows-msvc",
+        "aarch64-linux-android",
+        "armv7-linux-androideabi"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">= 10"
   }
 }
