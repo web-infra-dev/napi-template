@@ -1,4 +1,7 @@
-const { add } = require("./binding")
+const init = () => Promise.resolve()
+module.exports = init
+
+const { add } = require('./binding')
 
 // you can modify binding here
-exports.add = add
+module.exports.add = add

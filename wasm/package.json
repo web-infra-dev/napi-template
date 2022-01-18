@@ -1,11 +1,9 @@
 {
-  "name": "@speedy-js/wasm-template",
+  "name": "wasm",
   "version": "0.0.0",
+  "private": true,
   "main": "pkg-node/index.js",
   "types": "pkg-node/index.d.ts",
-  "browser": {
-    "pkg-node/index.js": "pkg-web/index.js"
-  },
   "repository": "https://github.com/speedy-js/napi-template.git",
   "license": "MIT",
   "publishConfig": {

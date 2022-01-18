@@ -472,30 +472,19 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v2
         with:
-          path: node/artifacts
+          path: artifacts
 
       - name: Move artifacts
-        run: pnpm artifacts --dir node
+        run: pnpm artifacts
 
       - name: List packages
-        run: ls -R ./node/npm
+        run: ls -R ./npm
         shell: bash
 
-      - name: Publish Node
+      - name: Publish
         if: "startsWith(github.event.head_commit.message, 'chore(release): publish')"
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          cd node
-          pnpm publish
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish Web-Assembly
-        if: "startsWith(github.event.head_commit.message, 'chore(release): publish')"
-        run: |
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          cd wasm
           pnpm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
